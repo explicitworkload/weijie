@@ -1,0 +1,20 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: todo
+  namespace: weijie
+  labels:
+    app: todo
+    app.kubernetes.io/name: todo
+spec:
+  # No host set on purpose — OpenShift generates one from the cluster's
+  # apps domain, so these manifests stay portable across clusters.
+  to:
+    kind: Service
+    name: todo
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
