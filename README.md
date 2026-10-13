@@ -1,27 +1,46 @@
-# weijie
+# Todo
 
-## hello
-this is weijie.
+A single-page todo app. One HTML file, no build step, no dependencies, no server. Tasks are saved in your browser via `localStorage`.
 
-### heading 3
-hell ohello
+## Run it
 
+Open [index.html](index.html) in a browser — double-click the file, or:
 
----------
-bye.
+```sh
+open index.html          # macOS
+```
 
+If you prefer serving it over HTTP:
 
+```sh
+python3 -m http.server 8000
+# then visit http://localhost:8000
+```
 
-**What I'm up to:**
-- Training & Deploying AI models (computer vision, text-to-speech, speech-to-text, audio transcribing) in various model formats (vLLM, gguf, onnx)
-- Mostly for enterprise customer requirements and their workstation requirements which increases the complexity
-- Building with FastAPI, Spring and Angular, always going deeper
-- Contributing to the Java/Spring ecosystem (cloud-native all the way)
-- Learning Kotlin, exploring React, tinkering with electronics on the side
+## What it does
 
-**Beyond the keyboard:**
-I travel to experience how people live in different corners of the world. I fix electronics for fun (broken or not—there's always something to learn). I play guitar, ride motorcycles, and generally gravitate toward anything that moves. Currently building something new.
+- Add tasks, mark them done, delete them
+- Edit a task by double-clicking its text (`Enter` saves, `Esc` cancels)
+- Filter by **All** / **Active** / **Done**
+- Clear all completed tasks at once
+- Live count of remaining tasks
+- Tasks persist across reloads
+- Light and dark themes, following your OS setting
+- Responsive down to small screens; keyboard and screen-reader friendly
 
-**Pronouns:** he/him/they
+## Project layout
 
+```
+index.html    the entire app — markup, styles, and logic
+README.md     this file
+```
 
+## Data
+
+Everything lives under the `localStorage` key `todo.items.v1`, as an array of `{ id, text, done }`. Nothing leaves the browser — no network calls, no analytics. Clearing site data for the page wipes your tasks.
+
+To reset manually, run this in the browser console:
+
+```js
+localStorage.removeItem("todo.items.v1");
+```
